@@ -36,16 +36,21 @@ app.post("/chat", async (req, res) => {
       ],
     });
     return;
+  } else {
+    res.send({
+      messages: [
+        {
+          text: "子承爸爸入職愉快",
+          audio: await audioFileToBase64("audios/message_0.mp3"),
+          lipsync: await readJsonTranscript(`audios/greeting_0.json`),
+          facialExpression: "smile",
+          animation: "Idle",
+        },
+      ],
+    });
   }
-  if (!elevenLabsApiKey) return;
 
-  let messages = [
-    {
-      text: userMessage,
-      facialExpression: "smile",
-      animation: "Idle",
-    },
-  ];
+  let messages = [];
   if (messages.messages) {
     messages = messages.messages; // ChatGPT is not 100% reliable, sometimes it directly returns an array and sometimes a JSON object with a messages property
   }
