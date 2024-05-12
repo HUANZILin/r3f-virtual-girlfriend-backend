@@ -50,21 +50,21 @@ app.post("/chat", async (req, res) => {
     });
   }
 
-  let messages = [];
-  if (messages.messages) {
-    messages = messages.messages; // ChatGPT is not 100% reliable, sometimes it directly returns an array and sometimes a JSON object with a messages property
-  }
-  for (let i = 0; i < messages.length; i++) {
-    const message = messages[i];
-    // generate audio file
-    const fileName = `audios/message_0.mp3`; // The name of your audio file
-    const textInput = message.text; // The text you wish to convert to speech
-    await voice.textToSpeech(elevenLabsApiKey, voiceID, fileName, textInput);
-    message.audio = await audioFileToBase64(fileName);
-    message.lipsync = await readJsonTranscript(`audios/greeting_0.json`);
-  }
+  // let messages = [];
+  // if (messages.messages) {
+  //   messages = messages.messages; // ChatGPT is not 100% reliable, sometimes it directly returns an array and sometimes a JSON object with a messages property
+  // }
+  // for (let i = 0; i < messages.length; i++) {
+  //   const message = messages[i];
+  //   // generate audio file
+  //   const fileName = `audios/message_0.mp3`; // The name of your audio file
+  //   const textInput = message.text; // The text you wish to convert to speech
+  //   await voice.textToSpeech(elevenLabsApiKey, voiceID, fileName, textInput);
+  //   message.audio = await audioFileToBase64(fileName);
+  //   message.lipsync = await readJsonTranscript(`audios/greeting_0.json`);
+  // }
 
-  res.send({ messages });
+  // res.send({ messages });
 });
 
 const readJsonTranscript = async (file) => {
